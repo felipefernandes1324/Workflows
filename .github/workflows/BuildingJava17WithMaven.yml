@@ -31,7 +31,7 @@ jobs:
       with:
         name: target-folder
         path: ./target
-Clamscan:
+  Clamscan:
 
     runs-on: ubuntu-latest
     needs: Buildando-jar
@@ -52,7 +52,7 @@ Clamscan:
         echo "Iniciando verificação"
         ls -l target/
         clamscan target/
-trivy-scan:
+  trivy-scan:
     runs-on: ubuntu-latest
     needs: Clamscan
     container:
