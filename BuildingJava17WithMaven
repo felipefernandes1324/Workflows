@@ -1,0 +1,33 @@
+name: Building Java 17 with Maven
+
+on:
+  worflow_call:
+    inputs:
+    image_name:
+      required: true
+      type: string
+    tag:
+      type: string
+
+jobs:
+  Buildando-jar:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - name: Buildando com Maven
+      run: |
+        echo "Iniciando build..."
+        mvn -B package --file pom.xml
+    - name: Subindo jar
+      uses: actions/upload-artifact@v4
+      with:
+        name: target-folder
+        path: ./target
